@@ -1,0 +1,37 @@
+Soal 1
+Jelaskan perbedaan persebaran nilai keabuan antara ketiga citra.
+Perbedaan Persebaran Nilai Keabuan (Histogram):
+Citra Grayscale Asli:
+Persebaran: Histogram citra asli menunjukkan distribusi intensitas piksel awal gambar. Puncak-puncak pada histogram menunjukkan intensitas piksel yang paling dominan di gambar. Jika gambar gelap, puncaknya akan berada di sisi kiri (nilai piksel rendah); jika terang, puncaknya akan berada di sisi kanan (nilai piksel tinggi).
+Citra Negatif:
+Persebaran: Histogram citra negatif secara efektif adalah cerminan (mirror) dari histogram citra asli. Karena transformasinya adalah G = 255 - F, nilai piksel yang awalnya rendah (gelap) menjadi tinggi (terang), dan sebaliknya. Ini berarti jika histogram asli memiliki puncak di sisi kiri, histogram negatif akan memiliki puncak yang sesuai di sisi kanan.
+Citra Logaritmik:
+Persebaran: Transformasi logaritmik, G = c * log(1 + F), cenderung menggeser persebaran nilai keabuan ke arah intensitas yang lebih tinggi (lebih terang). Ini karena transformasi ini sangat memperlebar rentang nilai piksel gelap dan mengompresi rentang nilai piksel terang. Akibatnya, histogramnya akan menunjukkan kecenderungan nilai piksel yang lebih tinggi dibandingkan histogram asli, seringkali dengan distribusi yang lebih merata atau bergeser ke kanan.
+Kapan Transformasi Logaritmik Lebih Bermanfaat Dibanding Negatif?
+Transformasi Logaritmik lebih bermanfaat dalam situasi di mana:
+Detail Tersembunyi di Area Gelap: Gambar memiliki rentang dinamis yang sangat luas, dan detail penting terkonsentrasi di area yang sangat gelap. Transformasi logaritmik efektif dalam memperluas kontras pada area gelap ini, sehingga detail-detail tersebut menjadi lebih terlihat tanpa membuat area terang menjadi terlalu jenuh atau kehilangan detail.
+Gambar dengan Kontras Rendah di Area Gelap: Contohnya adalah citra medis (X-ray, MRI), citra satelit, atau citra astronomi di mana informasi vital seringkali berada di area berintensitas rendah yang sulit dibedakan dengan mata telanjang.
+Mengurangi Perbedaan Intensitas yang Ekstrem: Transformasi logaritmik mengompresi rentang nilai piksel yang lebih tinggi, yang dapat membantu menormalisasi gambar dengan perbedaan intensitas yang sangat besar, membuat bagian terang dan gelap dapat dilihat secara bersamaan dengan lebih baik.
+Transformasi Negatif, di sisi lain, lebih sederhana dan biasanya digunakan untuk:
+Inversi Visual: Seperti tampilan negatif film fotografi.
+Penyorotan Objek Gelap: Jika ada objek yang sangat gelap di latar belakang yang terang, transformasi negatif akan membuatnya menjadi terang di latar belakang yang gelap, yang terkadang bisa membantu penyorotan visual.
+Peningkatan Kontras Umum: Namun, ia melakukannya secara linear dan bisa membuat area terang menjadi gelap, yang mungkin tidak diinginkan jika detail di area terang juga penting.
+Singkatnya, logaritmik dipilih untuk meningkatkan detail di area gelap tanpa mengorbankan terlalu banyak detail di area terang, sedangkan negatif adalah inversi langsung yang berguna untuk tujuan visual atau tugas-tugas spesifik yang membutuhkan inversi intensitas.
+
+
+Soal 2
+Perbandingan Hasil Visual dan Nilai Piksel Rata-Rata
+Grayscale Asli: Menampilkan gambar kucing dalam skala abu-abu dengan detail dan kontras yang seimbang. Nilai piksel rata-ratanya (141,33) mewakili intensitas rata-rata keseluruhan.
+Filter LPF: Gambar tampak lebih halus dan buram, dengan detail halus seperti tekstur bulu menjadi tidak jelas dan tepinya kurang tajam. Nilai piksel rata-rata (141,33) tetap sangat mendekati aslinya, karena LPF terutama mendistribusikan ulang intensitas piksel tanpa mengubah kecerahan keseluruhan secara signifikan.
+Filter HPF: Gambar ini terutama menonjolkan tepi dan detail yang tajam. Area yang seragam cenderung gelap, sementara tepi objek sangat terang. Nilai piksel rata-rata (7,75) secara signifikan lebih rendah daripada aslinya, karena HPF berfokus pada transisi intensitas, sehingga menghasilkan banyak area gelap.
+Filter BPF: Gambar tampak lebih tajam daripada aslinya, dengan tepi yang lebih menonjol dan lebih jelas. Filter ini mempertahankan karakteristik gambar secara keseluruhan sekaligus meningkatkan detail. Nilai piksel rata-rata (141,29) mendekati nilai aslinya, menunjukkan bahwa hal ini menyeimbangkan peningkatan frekuensi rentang menengah dengan pelestarian kontribusi frekuensi rendah.
+Hubungan antara Domain Spasial dan Frekuensi
+Filter gambar beroperasi dalam domain spasial (langsung pada piksel), tetapi efeknya paling baik dipahami dalam domain frekuensi, yang merepresentasikan laju perubahan intensitas:
+Low Pass Filter (LPF):
+Domain Spasial: Menggunakan kernel (misalnya, rata-rata) untuk menghaluskan perbedaan antar piksel yang berdekatan.
+Domain Frekuensi: Melewatkan frekuensi rendah (area seragam) dan menekan frekuensi tinggi (detail, tepi), sehingga menghasilkan keburaman.
+High Pass Filter (HPF):
+Domain Spasial: Menggunakan kernel (misalnya, Laplacian) yang merespons perubahan intensitas cepat antar piksel dengan kuat.
+Domain Frekuensi: Melewatkan frekuensi tinggi (detail, tepi) dan menekan frekuensi rendah (area seragam), sehingga tepi lebih menonjol dan latar belakang lebih gelap. Band Pass Filter (BPF):
+Domain Spasial: Kernel dirancang untuk meningkatkan rentang frekuensi tertentu, seringkali menggabungkan aspek LPF dan HPF (seperti filter penajaman).
+Domain Frekuensi: Melewatkan frekuensi dalam rentang tertentu (misalnya, frekuensi rentang menengah) sambil meredam frekuensi yang sangat rendah (kecerahan keseluruhan) dan sangat tinggi (derau).
